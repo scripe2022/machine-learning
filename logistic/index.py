@@ -8,15 +8,16 @@ import numpy as np
 dataset = "./data/" + "square"
 x_train, y_train = getData(dataset + "/train.txt")
 
-theta = np.array([0, 0, 0])
-rate = 0.01
-steps = 50000
+theta = np.array([-50, 0.05, 0.1])
+rate = 0.02
+steps = 30000
 
-for i in range(steps):
-    if i % 10000 == 0:
-        print("%sth step" % (str(i)))
+for i in range(steps + 1):
     y_train_hat = forward(x_train, theta)
     theta = theta - (rate * differential(x_train, y_train_hat, y_train))
+    if i % 1000 == 0:
+        J = loss(y_train_hat, y_train)
+        print("%sth step: loss=%f" % (str(i), J))
 
 
 def test():
