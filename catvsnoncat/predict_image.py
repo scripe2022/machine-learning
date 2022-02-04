@@ -1,7 +1,7 @@
 import sys
 import cv2
 import numpy as np
-from nnlib.dataset import flatten, normalization
+from nnlib.dataset import flatten, normalization, add_x0
 import matplotlib.pyplot as plt
 from nnlib.propagate import predict
 
@@ -11,7 +11,7 @@ img_file = cv2.resize(cv2.imread(filename), (128, 128), interpolation=cv2.INTER_
 img_orig = np.array([img_file])
 
 img_flatten = flatten(img_orig)
-img = normalization(img_flatten)
+img = add_x0(normalization(img_flatten))
 
 theta = np.loadtxt("theta.txt")
 y_hat = predict(theta, img)

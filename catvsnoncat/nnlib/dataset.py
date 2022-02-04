@@ -28,3 +28,9 @@ def flatten(dataset_orig):
 def normalization(dataset_flatten):
     dataset = dataset_flatten / 255
     return dataset
+
+
+def add_x0(dataset_flatten):
+    ones = np.ones(dataset_flatten.shape[1])
+    dataset_flatten_with_x0 = np.append(dataset_flatten, [ones], axis=0)
+    return dataset_flatten_with_x0

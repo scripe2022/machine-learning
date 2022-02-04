@@ -1,7 +1,7 @@
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
-from nnlib.dataset import load_dataset, flatten, normalization
+from nnlib.dataset import load_dataset, flatten, normalization, add_x0
 from nnlib.propagate import predict
 
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, label = load_dataset(
@@ -11,8 +11,8 @@ train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, label = load_dataset
 train_set_x_flatten = flatten(train_set_x_orig)
 test_set_x_flatten = flatten(test_set_x_orig)
 
-train_set_x = normalization(train_set_x_flatten)
-test_set_x = normalization(test_set_x_flatten)
+train_set_x = add_x0(normalization(train_set_x_flatten))
+test_set_x = add_x0(normalization(test_set_x_flatten))
 
 theta = np.loadtxt("theta.txt")
 costs = np.loadtxt("costs.txt")
