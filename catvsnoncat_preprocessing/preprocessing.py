@@ -40,6 +40,6 @@ with h5py.File("./datasets/train.h5", "w") as train_h5:
     train_h5.create_dataset("train_set_y", data=y[: int(n * TRAIN)])
     train_h5.create_dataset("list_classes", data=np.array(label, dtype="S"))
 with h5py.File("./datasets/test.h5", "w") as test_h5:
-    test_h5.create_dataset("train_set_x", data=dataset[int(n * TRAIN) :])
-    test_h5.create_dataset("train_set_y", data=y[int(n * TRAIN) :])
+    test_h5.create_dataset("test_set_x", data=dataset[int(n * TRAIN) :])
+    test_h5.create_dataset("test_set_y", data=y[int(n * TRAIN) :])
     test_h5.create_dataset("list_classes", data=np.array(label, dtype="S"))
