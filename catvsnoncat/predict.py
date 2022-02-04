@@ -34,6 +34,6 @@ for i in range(test_set_y_hat.shape[1]):
 print("train set: {:.2%}".format(1 - (train_set_error / train_set_y_hat.shape[1])))
 print("test set: {:.2%}".format(1 - (test_set_error / test_set_y_hat.shape[1])))
 
-plt.plot(range(costs.shape[0]), costs)
-plt.ylim((0, 0.5))
+plt.plot(np.array(range(costs.shape[0]))[::1000], costs[::1000])
+plt.ylim((0, 0.3))
 plt.show()
