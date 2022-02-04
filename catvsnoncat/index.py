@@ -30,14 +30,3 @@ rate = 0.0032
 theta, costs = optimize(theta, train_set_x, train_set_y, steps, rate)
 np.savetxt("theta.txt", theta)
 np.savetxt("costs.txt", costs)
-
-# index = 0
-# plt.title(
-#     "%dth image in train set, %s"
-#     % (
-#         index,
-#         label[train_set_y[0][index]].decode("utf-8"),
-#     )
-# )
-# plt.imshow(train_set_x_orig[index])
-# plt.show()
