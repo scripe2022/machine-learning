@@ -20,6 +20,9 @@ for i in range(steps + 1):
         print("%sth step: loss=%f" % (str(i), J))
 
 
+np.savetxt("theta.txt", theta)
+
+
 def test():
     x_test, y_test = getData(dataset + "/test.txt")
     y_test_hat = forward(x_test, theta)
