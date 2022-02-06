@@ -11,7 +11,7 @@ def J(a3, y):
     return (-1 / m) * np.sum(cost)
 
 
-def propogation(x, y, w0, b0, w1, b1, w2, b2):
+def propagation(x, y, w0, b0, w1, b1, w2, b2, returnCost=True):
     z1 = np.dot(w0, x) + b0
     # z1: (3, 350)
     a1 = np.tanh(z1)
@@ -24,4 +24,8 @@ def propogation(x, y, w0, b0, w1, b1, w2, b2):
     # z3: (1, 350)
     a3 = sigmoid(z3)
 
-    return (a1, a2, a3, J(a3, y))
+    if returnCost:
+        cost = J(a3, y)
+    else:
+        cost = 0
+    return (a1, a2, a3, cost)

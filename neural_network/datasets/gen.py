@@ -17,9 +17,9 @@ def getData():
     return [dataX, dataY, y]
 
 
-n = 500
-l = [0, 7]
-r = [3, 10]
+n = 1000
+l = [0, 5]
+r = [5, 10]
 
 train_set_x = []
 train_set_y = []

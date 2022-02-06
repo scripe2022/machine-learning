@@ -1,4 +1,5 @@
 import numpy as np
+from nnlib.propagation import propagation
 
 
 def backpropagation(a1, a2, a3, w0, w1, w2, x, y):
