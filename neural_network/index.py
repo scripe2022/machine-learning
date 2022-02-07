@@ -9,7 +9,7 @@ np.random.seed(971228)
 S = [2, 3, 3, 1]
 L = len(S) - 1
 RATE = 0.1
-STEPS = 5000
+STEPS = 50000
 w = [None] * L
 b = [None] * L
 for i in range(len(S) - 1):
