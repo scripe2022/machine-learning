@@ -1,6 +1,8 @@
 import numpy as np
 from nnlib.propagation import propagation
+from nnlib.sl import load_parameters
 import matplotlib.pyplot as plt
+
 
 train_set_x = np.loadtxt("datasets/train_set_x.txt")
 train_set_y = np.loadtxt("datasets/train_set_y.txt")
@@ -9,14 +11,7 @@ test_set_x = np.loadtxt("datasets/test_set_x.txt")
 test_set_y = np.loadtxt("datasets/test_set_y.txt")
 test_set_y = test_set_y.reshape((1, test_set_y.shape[0]))
 
-parameters = np.load("parameters.npz")
-L = parameters["L"]
-w = []
-b = []
-for i in range(L):
-    w.append(parameters["arr_%d" % (i)])
-for i in range(L, 2 * L):
-    b.append(parameters["arr_%d" % (i)])
+L, w, b = load_parameters("parameters.h5")
 
 a_train = propagation(train_set_x, train_set_y, w, b, returnCost=False)
 a_test = propagation(test_set_x, test_set_y, w, b, returnCost=False)

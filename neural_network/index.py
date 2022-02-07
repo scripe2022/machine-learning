@@ -1,8 +1,8 @@
-import h5py
 import numpy as np
 import matplotlib.pyplot as plt
 from nnlib.initialize import initialize_parameters
 from nnlib.propagation import propagation
+from nnlib.sl import save_parameters
 from nnlib.backpropagation import backpropagation
 
 np.random.seed(971228)
@@ -31,4 +31,5 @@ for i in range(STEPS):
     if i % 1000 == 0:
         print("steps: %d, loss: %f" % (i, J))
 
-np.savez("parameters.npz", L=L, *w, *b)
+
+save_parameters("parameters.h5", w, b)
