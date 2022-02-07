@@ -10,40 +10,29 @@ test_set_y = np.loadtxt("datasets/test_set_y.txt")
 test_set_y = test_set_y.reshape((1, test_set_y.shape[0]))
 
 parameters = np.load("parameters.npz")
+L = parameters["L"]
+w = []
+b = []
+for i in range(L):
+    w.append(parameters["arr_%d" % (i)])
+for i in range(L, 2 * L):
+    b.append(parameters["arr_%d" % (i)])
 
-_, _, y_train_hat, _ = propagation(
-    train_set_x,
-    train_set_y,
-    parameters["w0"],
-    parameters["b0"],
-    parameters["w1"],
-    parameters["b1"],
-    parameters["w2"],
-    parameters["b2"],
-)
-_, _, y_test_hat, _ = propagation(
-    test_set_x,
-    test_set_y,
-    parameters["w0"],
-    parameters["b0"],
-    parameters["w1"],
-    parameters["b1"],
-    parameters["w2"],
-    parameters["b2"],
-)
+a_train = propagation(train_set_x, train_set_y, w, b, returnCost=False)
+a_test = propagation(test_set_x, test_set_y, w, b, returnCost=False)
+y_hat_train = np.round(a_train[L])
+y_hat_test = np.round(a_test[L])
 
-y_train_hat = np.round(y_train_hat)
-y_test_hat = np.round(y_test_hat)
 
 m_train = train_set_y.shape[1]
 m_test = test_set_y.shape[1]
 index_train = np.arange(0, m_train)
 index_test = np.arange(0, m_test)
 
-train_accuracy = len(index_train[train_set_y[0] == y_train_hat[0]]) / m_train
+train_accuracy = len(index_train[train_set_y[0] == y_hat_train[0]]) / m_train
 print("Train set accuracy: {:.2%}".format(train_accuracy))
 
-test_accuracy = len(index_test[test_set_y[0] == y_test_hat[0]]) / m_test
+test_accuracy = len(index_test[test_set_y[0] == y_hat_test[0]]) / m_test
 print("Test set accuracy: {:.2%}".format(test_accuracy))
 
 
@@ -55,19 +44,8 @@ def vec(x, y):
 
 
 Z = np.array(list(map(vec, xx.reshape(-1), yy.reshape(-1)))).T
-_, _, zz, _ = propagation(
-    Z,
-    test_set_y,
-    parameters["w0"],
-    parameters["b0"],
-    parameters["w1"],
-    parameters["b1"],
-    parameters["w2"],
-    parameters["b2"],
-    False,
-)
-
-zz = zz.reshape(xx.shape[0], xx.shape[1])
+a_contour = propagation(Z, test_set_y, w, b, returnCost=False)
+zz = a_contour[L].reshape(xx.shape[0], xx.shape[1])
 
 plt.contourf(
     xx,

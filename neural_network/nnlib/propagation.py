@@ -5,27 +5,21 @@ def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
 
-def J(a3, y):
-    m = a3.shape[1]
-    cost = np.multiply(y, np.log(a3)) + np.multiply(1 - y, np.log(1 - a3))
+def J(y_hat, y):
+    m = y_hat.shape[1]
+    cost = np.multiply(y, np.log(y_hat)) + np.multiply(1 - y, np.log(1 - y_hat))
     return (-1 / m) * np.sum(cost)
 
 
-def propagation(x, y, w0, b0, w1, b1, w2, b2, returnCost=True):
-    z1 = np.dot(w0, x) + b0
-    # z1: (3, 350)
-    a1 = np.tanh(z1)
-
-    z2 = np.dot(w1, a1) + b1
-    # z2: (3, 350)
-    a2 = np.tanh(z2)
-
-    z3 = np.dot(w2, a2) + b2
-    # z3: (1, 350)
-    a3 = sigmoid(z3)
+def propagation(x, y, w, b, returnCost=True):
+    L = len(w)
+    a = []
+    a.append(x)
+    for i in range(1, L):
+        a.append(np.tanh(np.dot(w[i - 1], a[i - 1]) + b[i - 1]))
+    a.append(sigmoid(np.dot(w[L - 1], a[L - 1]) + b[L - 1]))
 
     if returnCost:
-        cost = J(a3, y)
+        return (a, J(a[L], y))
     else:
-        cost = 0
-    return (a1, a2, a3, cost)
+        return a
