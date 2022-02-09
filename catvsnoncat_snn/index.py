@@ -9,11 +9,11 @@ from nnlib.dataset import load_dataset, flatten, normalization
 # init
 np.random.seed(1)
 image_size = 128
-S = [image_size * image_size * 3, 20, 7, 5, 1]
+S = [image_size * image_size * 3, 14, 7, 1]
 # S = [2, 3, 3, 1]
 L = len(S) - 1
-RATE = 0.005
-STEPS = 10000
+RATE = 0.0075
+STEPS = 3000
 w = [None] * L
 b = [None] * L
 for i in range(len(S) - 1):

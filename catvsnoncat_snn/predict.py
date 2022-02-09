@@ -5,8 +5,9 @@ from nnlib.dataset import load_dataset, flatten, normalization
 import matplotlib.pyplot as plt
 
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, label = load_dataset(
-    "datasets/train_catvnoncat.h5", "datasets/test_catvnoncat.h5"
+    "datasets/train.h5", "datasets/test.h5"
 )
+print(test_set_x_orig.shape)
 train_set_x_flatten = flatten(train_set_x_orig)
 train_set_x = normalization(train_set_x_flatten)
 test_set_x_flatten = flatten(test_set_x_orig)
