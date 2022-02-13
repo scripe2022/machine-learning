@@ -113,7 +113,7 @@ def backpropagation(x, y, a, w, d):
 def gradient_check(x, y, w, b):
     dw = []
     db = []
-    delta = 1e-7
+    delta = 1e-9
     for i in range(L):
         dw.append(np.zeros((w[i].shape[0], w[i].shape[1])))
         db.append(np.zeros((b[i].shape[0], b[i].shape[1])))

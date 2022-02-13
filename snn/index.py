@@ -4,8 +4,6 @@ from hyperparameters import *
 from plot import plot
 import matplotlib.pyplot as plt
 
-np.random.seed(1)
-
 w, b = initialize_parameters()
 
 train_set_x, train_set_y = load_datasets(
@@ -15,7 +13,10 @@ test_set_x, test_set_y = load_datasets(
     "datasets/test_set_x.txt", "datasets/test_set_y.txt"
 )
 
-for i in range(1):
+for i in range(len(w)):
+    print(w[i].shape)
+
+for i in range(10):
     a, cache = propagation(train_set_x, train_set_y, w, b)
     a_test, cache_test = propagation(test_set_x, test_set_y, w, b)
     dw, db = backpropagation(train_set_x, train_set_y, a, w, cache["d"])
@@ -39,4 +40,4 @@ for i in range(1):
             )
         )
 
-plot(w, b)
+# plot(w, b)
