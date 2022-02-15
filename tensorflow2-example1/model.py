@@ -17,10 +17,10 @@ train_set_y = tf.constant(data_orig["label"].reshape((-1)), dtype="float64")
 
 model = tf.keras.models.Sequential(
     [
-        layers.InputLayer(input_shape=(2,)),
-        layers.Dense(7, activation="tanh"),
-        layers.Dense(5, activation="tanh"),
-        layers.Dense(1, activation="sigmoid"),
+        layers.InputLayer(input_shape=(2,), name="input"),
+        layers.Dense(7, activation="tanh", name="layer1"),
+        layers.Dense(5, activation="tanh", name="layer2"),
+        layers.Dense(1, activation="sigmoid", name="output"),
     ]
 )
 
@@ -29,7 +29,7 @@ model = tf.keras.models.Sequential(
 
 model.compile(
     loss=keras.losses.BinaryCrossentropy(from_logits=False),
-    optimizer="adam",
+    optimizer=keras.optimizers.Adam(learning_rate=0.001),
     metrics=["accuracy"],
 )
-model.fit(train_set_x, train_set_y, epochs=50, batch_size=64)
+model.fit(train_set_x, train_set_y, epochs=10, batch_size=64)
