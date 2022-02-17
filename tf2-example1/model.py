@@ -4,8 +4,8 @@ from tensorflow.keras import layers
 import numpy as np
 
 data_orig = np.load("data.npz")
-train_set_x = tf.constant(tf.transpose(data_orig["data"]), dtype="float64")
-train_set_y = tf.constant(data_orig["label"].reshape((-1)), dtype="float64")
+train_set_x = tf.constant(tf.transpose(data_orig["data"]))
+train_set_y = tf.constant(data_orig["label"].reshape((-1)))
 
 # print(train_set_x.shape)
 # print(train_set_y.shape)
@@ -29,7 +29,7 @@ model = tf.keras.models.Sequential(
 
 model.compile(
     loss=keras.losses.BinaryCrossentropy(from_logits=False),
-    optimizer=keras.optimizers.Adam(learning_rate=0.001),
-    metrics=["accuracy"],
+    optimizer=keras.optimizers.Adam(learning_rate=0.01),
+    metrics=tf.keras.metrics.BinaryAccuracy(),
 )
-model.fit(train_set_x, train_set_y, epochs=10, batch_size=64)
+model.fit(train_set_x, train_set_y, epochs=5, batch_size=64)
